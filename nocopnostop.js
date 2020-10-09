@@ -31,8 +31,9 @@ window.onload = function() {
 function drawNew() {
 	ctx.clearRect(0,0,canvasW, canvasH);
 	drawBackground();
-	drawUserCar();
 	drawTraffic();
+	drawUserCar();
+
 	// TODO:
 	// draw traffic
 	// draw pedestrian
@@ -122,13 +123,19 @@ function initTraffic() {
 
 function drawTraffic() {
 	var numCars = lTraffic.length;
+	//rotate code TODO rotating the canvas causes the cars to move vertically
+	ctx.translate(canvasW / 2, canvasH / 2);
+	ctx.rotate(Math.PI / 2);
 	for (var i = 0; i < numCars; i++) {
-		ctx.drawImage(lTraffic[i].img, lTraffic[i].x, lTraffic[i].y, carLength, carWidth);
+		ctx.drawImage(lTraffic[i].img, lTraffic[i].x, lTraffic[i].y, carWidth, carLength);
 	}
 	numCars = rTraffic.length;
+	ctx.rotate(-1*Math.PI);
 	for (var i = 0; i < numCars; i++) {
-		ctx.drawImage(rTraffic[i].img, rTraffic[i].x, rTraffic[i].y, carLength, carWidth);
+		ctx.drawImage(rTraffic[i].img, rTraffic[i].x, rTraffic[i].y, carWidth, carLength);
 	}
+	ctx.rotate(Math.PI / 2);
+	ctx.translate(-canvasW/2, -canvasH/2);
 }
 
 function moveTraffic() {

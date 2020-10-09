@@ -15,3 +15,7 @@ canvas {
   width: 80%;
   margin: auto;
 }
+
+img {
+	transform: rotate(90deg);
+}
