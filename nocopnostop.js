@@ -109,16 +109,45 @@ function drawBackground() {
  */
 function initTraffic() {
 	lTraffic = [
-		{x: (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 10, img: document.getElementById("car-slow-right")},
-		{x: 0, y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-med-right")},
-		{x: -1 * (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-fast-right")}
+		{
+			x: Math.floor(Math.random()*1.5*canvasW - canvasW/2), 
+			y: (canvasH / 2 + laneOffset), 
+			speed: 1, 
+			img: document.getElementById("car-slow-right")
+		},
+		{
+			x: Math.floor(Math.random()*1.5*canvasW - canvasW/2), 
+			y: (canvasH / 2 + laneOffset), 
+			speed: 3, 
+			img: document.getElementById("car-med-right")
+		},
+		{
+			x: Math.floor(Math.random()*1.5*canvasW - canvasW/2), 
+			y: (canvasH / 2 + laneOffset), 
+			speed: 5, 
+			img: document.getElementById("car-fast-right")
+		}
 	];
 	rTraffic = [
-		{x: 3*(canvasW / 4), y: (canvasH / 2 - carWidth - laneOffset), speed: 10, img: document.getElementById("car-slow-left")},
-		{x: canvasW, y: (canvasH / 2 - carWidth - laneOffset), speed: 1, img: document.getElementById("car-med-left")},
-		{x:  canvasW + (canvasW / 4), y: (canvasH / 2 -carWidth - laneOffset), speed: 1, img: document.getElementById("car-fast-left")}
+		{
+			x: Math.floor(Math.random()*1.5*canvasW), 
+			y: (canvasH / 2 - carWidth - laneOffset), 
+			speed: 1, 
+			img: document.getElementById("car-slow-left")
+		},
+		{
+			x: Math.floor(Math.random()*1.5*canvasW), 
+			y: (canvasH / 2 - carWidth - laneOffset), 
+			speed: 3, 
+			img: document.getElementById("car-med-left")
+		},
+		{
+			x: Math.floor(Math.random()*1.5*canvasW), 
+			y: (canvasH / 2 -carWidth - laneOffset), 
+			speed: 5, 
+			img: document.getElementById("car-fast-left")
+		}
 	];
-	//drawTraffic();
 }
 
 function drawTraffic() {
