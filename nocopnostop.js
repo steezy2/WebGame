@@ -109,12 +109,12 @@ function drawBackground() {
  */
 function initTraffic() {
 	lTraffic = [
-		{x: (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-slow")},
+		{x: (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 10, img: document.getElementById("car-slow")},
 		{x: 0, y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-med")},
 		{x: -1 * (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-fast")}
 	];
 	rTraffic = [
-		{x: 3*(canvasW / 4), y: (canvasH / 2 - carWidth - laneOffset), speed: 1, img: document.getElementById("car-slow")},
+		{x: 3*(canvasW / 4), y: (canvasH / 2 - carWidth - laneOffset), speed: 10, img: document.getElementById("car-slow")},
 		{x: canvasW, y: (canvasH / 2 - carWidth - laneOffset), speed: 1, img: document.getElementById("car-med")},
 		{x:  canvasW + (canvasW / 4), y: (canvasH / 2 -carWidth - laneOffset), speed: 1, img: document.getElementById("car-fast")}
 	];
@@ -124,18 +124,14 @@ function initTraffic() {
 function drawTraffic() {
 	var numCars = lTraffic.length;
 	//rotate code TODO rotating the canvas causes the cars to move vertically
-	ctx.translate(canvasW / 2, canvasH / 2);
-	ctx.rotate(Math.PI / 2);
 	for (var i = 0; i < numCars; i++) {
 		ctx.drawImage(lTraffic[i].img, lTraffic[i].x, lTraffic[i].y, carWidth, carLength);
 	}
 	numCars = rTraffic.length;
-	ctx.rotate(-1*Math.PI);
 	for (var i = 0; i < numCars; i++) {
 		ctx.drawImage(rTraffic[i].img, rTraffic[i].x, rTraffic[i].y, carWidth, carLength);
 	}
-	ctx.rotate(Math.PI / 2);
-	ctx.translate(-canvasW/2, -canvasH/2);
+
 }
 
 function moveTraffic() {
