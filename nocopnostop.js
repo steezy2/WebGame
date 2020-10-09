@@ -109,27 +109,26 @@ function drawBackground() {
  */
 function initTraffic() {
 	lTraffic = [
-		{x: (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 10, img: document.getElementById("car-slow")},
-		{x: 0, y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-med")},
-		{x: -1 * (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-fast")}
+		{x: (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 10, img: document.getElementById("car-slow-right")},
+		{x: 0, y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-med-right")},
+		{x: -1 * (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-fast-right")}
 	];
 	rTraffic = [
-		{x: 3*(canvasW / 4), y: (canvasH / 2 - carWidth - laneOffset), speed: 10, img: document.getElementById("car-slow")},
-		{x: canvasW, y: (canvasH / 2 - carWidth - laneOffset), speed: 1, img: document.getElementById("car-med")},
-		{x:  canvasW + (canvasW / 4), y: (canvasH / 2 -carWidth - laneOffset), speed: 1, img: document.getElementById("car-fast")}
+		{x: 3*(canvasW / 4), y: (canvasH / 2 - carWidth - laneOffset), speed: 10, img: document.getElementById("car-slow-left")},
+		{x: canvasW, y: (canvasH / 2 - carWidth - laneOffset), speed: 1, img: document.getElementById("car-med-left")},
+		{x:  canvasW + (canvasW / 4), y: (canvasH / 2 -carWidth - laneOffset), speed: 1, img: document.getElementById("car-fast-left")}
 	];
 	//drawTraffic();
 }
 
 function drawTraffic() {
 	var numCars = lTraffic.length;
-	//rotate code TODO rotating the canvas causes the cars to move vertically
 	for (var i = 0; i < numCars; i++) {
-		ctx.drawImage(lTraffic[i].img, lTraffic[i].x, lTraffic[i].y, carWidth, carLength);
+		ctx.drawImage(lTraffic[i].img, lTraffic[i].x, lTraffic[i].y, carLength, carWidth);
 	}
 	numCars = rTraffic.length;
 	for (var i = 0; i < numCars; i++) {
-		ctx.drawImage(rTraffic[i].img, rTraffic[i].x, rTraffic[i].y, carWidth, carLength);
+		ctx.drawImage(rTraffic[i].img, rTraffic[i].x, rTraffic[i].y, carLength, carWidth);
 	}
 
 }
