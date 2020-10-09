@@ -13,6 +13,7 @@ var userCarSlow, userCarMed, userCarFast;
 var userCar;
 var laneOffset;
 var moveInterval;
+var lTraffic, rTraffic;
 
 
 /* TODO
@@ -31,6 +32,7 @@ function drawNew() {
 	ctx.clearRect(0,0,canvasW, canvasH);
 	drawBackground();
 	drawUserCar();
+	drawTraffic();
 	// TODO:
 	// draw traffic
 	// draw pedestrian
@@ -40,6 +42,7 @@ function drawNew() {
 function moveAndDraw() {
 	//userCar.y -= 2; //TODO REMOVE... SPEED REFERENCE
 	// move traffic
+	moveTraffic();
 	// move peds
 	// redraw
 	drawNew();
@@ -103,6 +106,47 @@ function drawBackground() {
  * Cross Traffic - Array of maybe 6-8 cars that move across the screen, half from left half from right
  * 
  */
+function initTraffic() {
+	lTraffic = [
+		{x: (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-slow")},
+		{x: 0, y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-med")},
+		{x: -1 * (canvasW / 4), y: (canvasH / 2 + laneOffset), speed: 1, img: document.getElementById("car-fast")}
+	];
+	rTraffic = [
+		{x: 3*(canvasW / 4), y: (canvasH / 2 - carWidth - laneOffset), speed: 1, img: document.getElementById("car-slow")},
+		{x: canvasW, y: (canvasH / 2 - carWidth - laneOffset), speed: 1, img: document.getElementById("car-med")},
+		{x:  canvasW + (canvasW / 4), y: (canvasH / 2 -carWidth - laneOffset), speed: 1, img: document.getElementById("car-fast")}
+	];
+	//drawTraffic();
+}
+
+function drawTraffic() {
+	var numCars = lTraffic.length;
+	for (var i = 0; i < numCars; i++) {
+		ctx.drawImage(lTraffic[i].img, lTraffic[i].x, lTraffic[i].y, carLength, carWidth);
+	}
+	numCars = rTraffic.length;
+	for (var i = 0; i < numCars; i++) {
+		ctx.drawImage(rTraffic[i].img, rTraffic[i].x, rTraffic[i].y, carLength, carWidth);
+	}
+}
+
+function moveTraffic() {
+	var numCars = lTraffic.length;
+	for (var i = 0; i < numCars; i++) {
+		if (lTraffic[i].x > canvasW + carLength){
+			lTraffic[i].x = -1 * (canvasW / 2);
+		}
+		lTraffic[i].x += lTraffic[i].speed;
+	}
+	numCars = rTraffic.length;
+	for (var i = 0; i < numCars; i++) {
+		if (rTraffic[i].x < 0 - carLength){
+			rTraffic[i].x =  1.5 * canvasW;
+		}
+		rTraffic[i].x -= rTraffic[i].speed;
+	}
+}
 
 
 /* TODO
@@ -188,6 +232,7 @@ function setup() {
 	// ***Draw Background***
 	drawBackground();
 	// ***Begin Cars Crossing***
+	initTraffic();
 	// TODO Traffic and Pedestrians
 
 	// ***User Cars and movement***
@@ -210,7 +255,7 @@ function setup() {
 		img: document.getElementById("car-slow")
 	};
 	// Init to Medium Car
-	setUserCar(1);
+	setUserCar(2);
 	drawUserCar();
 	// Add keys listener
 	window.addEventListener("keydown", keyDown, false);
