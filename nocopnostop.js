@@ -21,48 +21,10 @@ var moveInterval;
  * 
  */
 window.onload = function() {
-	// ***Get Elements***
-	canvas = document.getElementById("myCanvas");
-	ctx = canvas.getContext("2d");
-	canvasH = canvas.height;
-	canvasW = canvas.width;
-	laneOffset = 6;
-	carLength = canvasH / 6;
-	carWidth = canvasH / 8 - 2*laneOffset;
-
-	// ***Draw Background***
-	drawBackground();
-	// ***Begin Cars Crossing***
-	// TODO Traffic and Pedestrians
-
-	// ***User Cars and movement***
-	userCarFast = {
-		x: canvasW / 2 + laneOffset,
-		y: canvasH - carLength,
-		speed: 12, 
-		img: document.getElementById("car-fast")
-	};
-	userCarMed = {
-		x: canvasW / 2 + laneOffset,
-		y: canvasH - carLength,
-		speed: 8, 
-		img: document.getElementById("car-med")
-	};
-	userCarSlow = {
-		x: canvasW / 2 + laneOffset,
-		y: canvasH - carLength,
-		speed: 4, 
-		img: document.getElementById("car-slow")
-	};
-	// Init to Medium Car
-	setUserCar(1);
-	drawUserCar();
-	// Add keys listener
-	window.addEventListener("keydown", keyDown, false);
-
-	// Get everyone Moving
-	moveInterval = setInterval(moveAndDraw, 35);
+  setup();
 }
+
+
 
 // Function to draw everyone
 function drawNew() {
@@ -205,3 +167,54 @@ function keyDown(event) {
 	}
 }
 
+//resize window
+$(window).resize(function() {
+  setup();
+});
+
+
+function setup() {
+	// ***Get Elements***
+  canvas = document.getElementById("myCanvas");
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.width*0.5;
+	ctx = canvas.getContext("2d");
+	canvasH = canvas.height;
+	canvasW = canvas.width;
+	laneOffset = 6;
+	carLength = canvasH / 6;
+	carWidth = canvasH / 8 - 2*laneOffset;
+
+	// ***Draw Background***
+	drawBackground();
+	// ***Begin Cars Crossing***
+	// TODO Traffic and Pedestrians
+
+	// ***User Cars and movement***
+	userCarFast = {
+		x: canvasW / 2 + laneOffset,
+		y: canvasH - carLength,
+		speed: 12, 
+		img: document.getElementById("car-fast")
+	};
+	userCarMed = {
+		x: canvasW / 2 + laneOffset,
+		y: canvasH - carLength,
+		speed: 8, 
+		img: document.getElementById("car-med")
+	};
+	userCarSlow = {
+		x: canvasW / 2 + laneOffset,
+		y: canvasH - carLength,
+		speed: 4, 
+		img: document.getElementById("car-slow")
+	};
+	// Init to Medium Car
+	setUserCar(1);
+	drawUserCar();
+	// Add keys listener
+	window.addEventListener("keydown", keyDown, false);
+
+	// Get everyone Moving
+	moveInterval = setInterval(moveAndDraw, 35);
+}
