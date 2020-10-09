@@ -12,6 +12,7 @@ var carWidth;
 var userCarSlow, userCarMed, userCarFast;
 var userCar;
 var laneOffset;
+var moveInterval;
 
 
 /* TODO
@@ -32,11 +33,13 @@ window.onload = function() {
 	// ***Draw Background***
 	drawBackground();
 	// ***Begin Cars Crossing***
+	// TODO Traffic and Pedestrians
+
 	// ***User Cars and movement***
 	userCarFast = {
 		x: canvasW / 2 + laneOffset,
 		y: canvasH - carLength,
-		speed: 10, 
+		speed: 12, 
 		img: document.getElementById("car-fast")
 	};
 	userCarMed = {
@@ -45,18 +48,20 @@ window.onload = function() {
 		speed: 8, 
 		img: document.getElementById("car-med")
 	};
-	userCarFast = {
+	userCarSlow = {
 		x: canvasW / 2 + laneOffset,
 		y: canvasH - carLength,
-		speed: 5, 
+		speed: 4, 
 		img: document.getElementById("car-slow")
 	};
 	// Init to Medium Car
 	setUserCar(1);
-	
 	drawUserCar();
+	// Add keys listener
 	window.addEventListener("keydown", keyDown, false);
 
+	// Get everyone Moving
+	moveInterval = setInterval(moveAndDraw, 35);
 }
 
 // Function to draw everyone
@@ -64,13 +69,23 @@ function drawNew() {
 	ctx.clearRect(0,0,canvasW, canvasH);
 	drawBackground();
 	drawUserCar();
+	// TODO:
 	// draw traffic
 	// draw pedestrian
-	// check collisions
+}
+
+// Function to move traffic and peds, then draw
+function moveAndDraw() {
+	//userCar.y -= 2; //TODO REMOVE... SPEED REFERENCE
+	// move traffic
+	// move peds
+	// redraw
+	drawNew();
+	//check collisions
 }
 
 
-/* TODO
+/*
  *
  * Background
  * 
@@ -123,14 +138,14 @@ function drawBackground() {
 
 /* TODO
  *
- * Cross Traffic
+ * Cross Traffic - Array of maybe 6-8 cars that move across the screen, half from left half from right
  * 
  */
 
 
 /* TODO
  *
- * Pedestrians
+ * Pedestrians - Same as cross traffic
  * 
  */
 
@@ -187,16 +202,6 @@ function keyDown(event) {
 				userCar.y += userCar.speed;
 				drawNew();
 			break;
-		// case 37: //LEFT
-		// 	if (pikaX >= 5)
-		// 		pikaX -= 5;
-		// 		drawNew();
-		// 	break;
-		// case 39: //RIGHT
-		// 	if (pikaX <= w - pikaW - 5)
-		// 		pikaX += 5;
-		// 		drawNew();
-		// 	break;
 	}
 }
 
