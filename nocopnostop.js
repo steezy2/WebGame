@@ -14,9 +14,12 @@ var userCar;
 var laneOffset;
 var moveInterval;
 var lTraffic, rTraffic;
+var finishY;
+var isGameOver;
+var totalScore, levelScore;
 
 
-/* TODO
+/*
  *
  * Initialization
  * 
@@ -35,20 +38,16 @@ function drawNew() {
 	drawUserCar();
 
 	// TODO:
-	// draw traffic
 	// draw pedestrian
 }
 
 // Function to move traffic and peds, then draw
 function moveAndDraw() {
-	//userCar.y -= 2; //TODO REMOVE... SPEED REFERENCE
-	// move traffic
 	moveTraffic();
-	// move peds
-	// redraw
+	// TODO move peds
 	drawNew();
-	//check collisions
 	checkCollisions();
+	checkSuccess();
 }
 
 
@@ -90,7 +89,6 @@ function drawBackground() {
 	
 	// ***Crosswalk***
 	ctx.fillStyle = "#FFFFFF";
-	// vertical
 	rW = 8;
 	rL = 30;
 	rStart = (canvasH / 2) - (canvasH / 8) - rL;
@@ -103,7 +101,7 @@ function drawBackground() {
 }
 
 
-/* TODO
+/*
  *
  * Cross Traffic - Array of maybe 6-8 cars that move across the screen, half from left half from right
  * 
@@ -219,9 +217,18 @@ function rectOverlap(uCar, tCar) {
 // TODO Function to handle a collision
 function handleCollision() {
 	window.clearInterval(moveInterval);
+	window.removeEventListener("keydown", arrowKeys);
+	gameOver();
 }
 
 // TODO Function to handle successful crossing
+function checkSuccess() {
+	if (userCar.y <= finishY) {
+		window.clearInterval(moveInterval);
+		window.removeEventListener("keydown", arrowKeys);
+		// TODO - change level (increase traffic speed, change user car)
+	}
+}
 
 
 /* TODO
@@ -263,7 +270,7 @@ function setUserCar(spd) {
 }
 
 /* Key press handling */
-function keyDown(event) {
+function arrowKeys(event) {
 	// Do key actions
 	switch (event.keyCode) {
 		case 38: //UP
@@ -276,6 +283,18 @@ function keyDown(event) {
 				userCar.y += userCar.speed;
 				drawNew();
 			break;
+	}
+}
+
+function spaceKey(event) {
+	if (event.keyCode === 32) {
+		if (isGameOver) {
+			window.removeEventListener("keydown", spaceKey);
+			setup();
+		}
+		else {
+			alert("game not over");
+		}
 	}
 }
 
@@ -296,6 +315,10 @@ function setup() {
 	laneOffset = 6;
 	carLength = canvasH / 6;
 	carWidth = canvasH / 8 - 2*laneOffset;
+	finishY = Math.ceil(canvasH / 20);
+	isGameOver = false;
+	totalScore = 0;
+	levelScore = 1600;
 
 	// ***Draw Background***
 	drawBackground();
@@ -326,8 +349,32 @@ function setup() {
 	setUserCar(2);
 	drawUserCar();
 	// Add keys listener
-	window.addEventListener("keydown", keyDown, false);
+	window.addEventListener("keydown", arrowKeys, false);
 
 	// Get everyone Moving
 	moveInterval = setInterval(moveAndDraw, 35);
+}
+
+function gameOver() {
+	isGameOver = true;
+	drawInfoBox();
+	drawGameOverText();
+	window.addEventListener("keydown", spaceKey, false);
+}
+
+function drawInfoBox() {
+	// Draw Rect
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fillRect(canvasW/6, canvasH/6, 2*canvasW/3, 2*canvasH/3);
+}
+
+function drawGameOverText() {
+	ctx.fillStyle = "#000000";
+	ctx.font = "30px Arial";
+	if (canvasW < 250) {
+		ctx.font = "18px Arial";
+	}
+	ctx.fillText("Game Over!", canvasW/4, canvasH/4); 
+	ctx.fillText("Score: " + totalScore, canvasW/4, canvasH/2);
+	ctx.fillText("Press SPACE to Play Again!", canvasW/4, 3*canvasH/4);
 }
