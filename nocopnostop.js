@@ -291,11 +291,13 @@ function arrowKeys(event) {
 	// Do key actions
 	switch (event.keyCode) {
 		case 38: //UP
+		event.preventDefault();
 			if (userCar.y >= 0) //Move cars at different speeds
 				userCar.y -= userCar.speed;
 				drawNew();
 			break;
 		case 40: //DOWN
+			event.preventDefault();
 			if (userCar.y <= canvasH - carLength)
 				userCar.y += userCar.speed;
 				drawNew();
@@ -305,6 +307,7 @@ function arrowKeys(event) {
 
 function spaceKey(event) {
 	if (event.keyCode === 32) {
+		event.preventDefault();
 		window.removeEventListener("keydown", spaceKey);
 		if (isGameOver) {
 			setup();
