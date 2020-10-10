@@ -320,7 +320,7 @@ function spaceKey(event) {
 
 //resize window
 $(window).resize(function() {
-  setup();
+  location.reload();
 });
 
 
