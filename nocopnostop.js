@@ -11,6 +11,8 @@ var carLength;
 var carWidth;
 var userCarSlow, userCarMed, userCarFast;
 var userCar;
+var userCarFront, userCarBack, userCarLeft, userCarRight;
+var obX, obY;
 var laneOffset;
 var moveInterval;
 var lTraffic, rTraffic;
@@ -48,6 +50,7 @@ function moveAndDraw() {
 	// redraw
 	drawNew();
 	//check collisions
+	checkCollisions();
 }
 
 
@@ -185,6 +188,39 @@ function moveTraffic() {
  * Pedestrians - Same as cross traffic
  * 
  */
+
+
+// TODO Function to check collisions
+function checkCollisions() {
+	userCarLeft = userCar.x;
+	userCarRight = userCar.x + carWidth;
+	userCarFront = userCar.y;
+	userCarBack = userCar.y + carLength;
+
+	// check lTraffic
+	var numObs = lTraffic.length;
+	for (var i = 0; i < numObs; i++){
+		obX = lTraffic[i].x;
+		obY = lTraffic[i].y;
+		// check hit from left
+		if (obX + carLength >= userCarLeft && obX + carLength <= userCarRight){
+			if (obY <= userCarBack && obY + carWidth > userCarFront){
+				handleCollision();
+			}
+		}
+		// TODO check hit
+	}
+	// TODO check rTraffic
+	// TODO check bottom peds
+	// TODO check top peds
+}
+
+// TODO Function to handle a collision
+function handleCollision() {
+	window.clearInterval(moveInterval);
+}
+
+// TODO Function to handle successful crossing
 
 
 /* TODO
