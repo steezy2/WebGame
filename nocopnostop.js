@@ -226,8 +226,8 @@ function checkCollisions() {
 
 function rectOverlap(uCar, tCar) {
 	//if they don't align in x or y, false. else true
-	if (uCar.x + carWidth < tCar.x || uCar.x > tCar.x + carLength) {return false;}
-	if (uCar.y > tCar.y + carWidth || uCar.y + carLength < tCar.y) {return false;}
+	if (uCar.x + carWidth - 4 < tCar.x || uCar.x > tCar.x + carLength - 4) {return false;}
+	if (uCar.y > tCar.y + carWidth - 4 || uCar.y + carLength - 4 < tCar.y) {return false;}
 	return true;
 }
 
@@ -357,7 +357,7 @@ function setup() {
 	userCarSlow = {
 		x: canvasW / 2 + laneOffset,
 		y: canvasH - carLength,
-		speed: 4, 
+		speed: 5, 
 		img: document.getElementById("car-slow")
 	};
 
