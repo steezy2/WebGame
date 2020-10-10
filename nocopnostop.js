@@ -11,6 +11,7 @@ var carLength;
 var carWidth;
 var userCarSlow, userCarMed, userCarFast;
 var userCar;
+var userCarNum;
 var laneOffset;
 var moveInterval;
 var lTraffic, rTraffic;
@@ -43,6 +44,11 @@ function drawNew() {
 
 // Function to move traffic and peds, then draw
 function moveAndDraw() {
+	if (levelScore < 500) {
+		levelScore = 500;
+	} else if (levelScore > 500) {
+		levelScore -= 5;
+	}
 	moveTraffic();
 	// TODO move peds
 	drawNew();
@@ -178,6 +184,17 @@ function moveTraffic() {
 	}
 }
 
+function increaseDifficulty() {
+	var numCars = lTraffic.length;
+	for (var i = 0; i < numCars; i++) {
+		lTraffic[i].speed = Math.ceil(1.1*lTraffic[i].speed);
+	}
+	numCars = rTraffic.length;
+	for (var i = 0; i < numCars; i++) {
+		rTraffic[i].speed = Math.ceil(1.1*rTraffic[i].speed);
+	}
+}
+
 
 /* TODO
  *
@@ -226,7 +243,7 @@ function checkSuccess() {
 	if (userCar.y <= finishY) {
 		window.clearInterval(moveInterval);
 		window.removeEventListener("keydown", arrowKeys);
-		// TODO - change level (increase traffic speed, change user car)
+		crossSuccess();
 	}
 }
 
@@ -288,12 +305,12 @@ function arrowKeys(event) {
 
 function spaceKey(event) {
 	if (event.keyCode === 32) {
+		window.removeEventListener("keydown", spaceKey);
 		if (isGameOver) {
-			window.removeEventListener("keydown", spaceKey);
 			setup();
 		}
 		else {
-			alert("game not over");
+			initNextLevel();
 		}
 	}
 }
@@ -319,12 +336,7 @@ function setup() {
 	isGameOver = false;
 	totalScore = 0;
 	levelScore = 1600;
-
-	// ***Draw Background***
-	drawBackground();
-	// ***Begin Cars Crossing***
-	initTraffic();
-	// TODO Traffic and Pedestrians
+	userCarNum = 1;
 
 	// ***User Cars and movement***
 	userCarFast = {
@@ -345,8 +357,14 @@ function setup() {
 		speed: 4, 
 		img: document.getElementById("car-slow")
 	};
+
+	// ***Draw Background***
+	drawBackground();
+	// ***Begin Cars Crossing***
+	initTraffic();
+	// TODO Traffic and Pedestrians
 	// Init to Medium Car
-	setUserCar(2);
+	setUserCar(userCarNum);
 	drawUserCar();
 	// Add keys listener
 	window.addEventListener("keydown", arrowKeys, false);
@@ -361,6 +379,24 @@ function gameOver() {
 	drawGameOverText();
 	window.addEventListener("keydown", spaceKey, false);
 }
+
+function crossSuccess() {
+	totalScore += levelScore;
+	drawInfoBox();
+	drawNextLevelText();
+	window.addEventListener("keydown", spaceKey, false);
+}
+
+function initNextLevel() {
+	levelScore = 1600;
+	increaseDifficulty();
+	drawBackground(); 
+	userCarNum = (userCarNum + 1) % 3;
+	setUserCar(userCarNum);
+	window.addEventListener("keydown", arrowKeys, false);
+	moveInterval= setInterval(moveAndDraw, 35);
+}
+
 
 function drawInfoBox() {
 	// Draw Rect
@@ -377,4 +413,15 @@ function drawGameOverText() {
 	ctx.fillText("Game Over!", canvasW/4, canvasH/4); 
 	ctx.fillText("Score: " + totalScore, canvasW/4, canvasH/2);
 	ctx.fillText("Press SPACE to Play Again!", canvasW/4, 3*canvasH/4);
+}
+
+function drawNextLevelText() {
+	ctx.fillStyle = "#000000";
+	ctx.font = "30px Arial";
+	if (canvasW < 250) {
+		ctx.font = "18px Arial";
+	}
+	ctx.fillText("Nice! Level Score: " + levelScore, canvasW/4, canvasH/4); 
+	ctx.fillText("Total Score: " + totalScore, canvasW/4, canvasH/2);
+	ctx.fillText("Press SPACE for Next Level!", canvasW/4, 3*canvasH/4);
 }
