@@ -1,6 +1,93 @@
+
+
+.stop-sign,
+.stop-sign * {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.stop-sign div {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  text-align: auto;
+  color: white;
+  font-weight: 640;
+  font-family: 'Roboto', 'Open Sans Condensed', 'Open Sans', 'Source Sans Pro', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+}
+
+.stop-sign div span {
+  position:absolute;
+  font-size:20pt;
+  top: 25px; right: 10px; left: 10px;
+
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+/* Background */
+.stop-sign div,
+.stop-sign div > div > div,
+.stop-sign div > div > div > div > div {
+  background: transparent;
+}
+.stop-sign div > div,
+.stop-sign div > div > div > div > div > div {
+  background: red;
+}
+.stop-sign div > div > div > div {
+  background: white;
+}
+/* Rotation and Sizing */
+.stop-sign div > div,
+.stop-sign div > div > div > div,
+.stop-sign div > div > div > div > div > div {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.stop-sign div > div > div {
+  width: 90px;
+  height: 90px;
+  top: 5px;
+}
+.stop-sign div > div > div > div > div {
+  width: 80px;
+  height: 80px;
+  top: 5px;
+}
+/*  */
+#game-section {
+  align-items: center;
+  justify-content: center;
+}
+header, footer{
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 /* TODO
  *
- * Align all center 
+ * Align all center
  * Nice color styling and such
  * 3 CSS3 Features
  *

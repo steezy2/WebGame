@@ -1,7 +1,7 @@
 /*
  *
- * Declarations 
- * 
+ * Declarations
+ *
  */
 var canvas;
 var ctx;
@@ -23,7 +23,7 @@ var totalScore, levelScore;
 /*
  *
  * Initialization
- * 
+ *
  */
 window.onload = function() {
   setup();
@@ -60,15 +60,15 @@ function moveAndDraw() {
 /*
  *
  * Background
- * 
+ *
  */
 function drawBackground() {
 	// ***BG Grass***
-	ctx.fillStyle = "#00FF99";
+	ctx.fillStyle = "#006633";
 	ctx.fillRect(0, 0, canvasW, canvasH);
 
 	// ***Pavement***
-	ctx.fillStyle = "#BBBBCC";
+	ctx.fillStyle = "#000000";
 	// vertical
 	var rStart = (canvasW / 2) - (canvasW / 8);
 	var rW = canvasW / 4;
@@ -92,7 +92,7 @@ function drawBackground() {
 	for (var curX = 0; curX <= canvasW - rL; curX += 2*rL) {
 		ctx.fillRect(curX, rStart, rL, rW);
 	}
-	
+
 	// ***Crosswalk***
 	ctx.fillStyle = "#FFFFFF";
 	rW = 8;
@@ -110,46 +110,46 @@ function drawBackground() {
 /*
  *
  * Cross Traffic - Array of maybe 6-8 cars that move across the screen, half from left half from right
- * 
+ *
  */
 function initTraffic() {
 	lTraffic = [
 		{
-			x: Math.floor(Math.random()*1.5*canvasW - canvasW/2), 
-			y: (canvasH / 2 + laneOffset), 
-			speed: 1, 
+			x: Math.floor(Math.random()*1.5*canvasW - canvasW/2),
+			y: (canvasH / 2 + laneOffset),
+			speed: 1,
 			img: document.getElementById("car-slow-right")
 		},
 		{
-			x: Math.floor(Math.random()*1.5*canvasW - canvasW/2), 
-			y: (canvasH / 2 + laneOffset), 
-			speed: 3, 
+			x: Math.floor(Math.random()*1.5*canvasW - canvasW/2),
+			y: (canvasH / 2 + laneOffset),
+			speed: 3,
 			img: document.getElementById("car-med-right")
 		},
 		{
-			x: Math.floor(Math.random()*1.5*canvasW - canvasW/2), 
-			y: (canvasH / 2 + laneOffset), 
-			speed: 5, 
+			x: Math.floor(Math.random()*1.5*canvasW - canvasW/2),
+			y: (canvasH / 2 + laneOffset),
+			speed: 5,
 			img: document.getElementById("car-fast-right")
 		}
 	];
 	rTraffic = [
 		{
-			x: Math.floor(Math.random()*1.5*canvasW), 
-			y: (canvasH / 2 - carWidth - laneOffset), 
-			speed: 1, 
+			x: Math.floor(Math.random()*1.5*canvasW),
+			y: (canvasH / 2 - carWidth - laneOffset),
+			speed: 1,
 			img: document.getElementById("car-slow-left")
 		},
 		{
-			x: Math.floor(Math.random()*1.5*canvasW), 
-			y: (canvasH / 2 - carWidth - laneOffset), 
-			speed: 3, 
+			x: Math.floor(Math.random()*1.5*canvasW),
+			y: (canvasH / 2 - carWidth - laneOffset),
+			speed: 3,
 			img: document.getElementById("car-med-left")
 		},
 		{
-			x: Math.floor(Math.random()*1.5*canvasW), 
-			y: (canvasH / 2 -carWidth - laneOffset), 
-			speed: 5, 
+			x: Math.floor(Math.random()*1.5*canvasW),
+			y: (canvasH / 2 -carWidth - laneOffset),
+			speed: 5,
 			img: document.getElementById("car-fast-left")
 		}
 	];
@@ -199,7 +199,7 @@ function increaseDifficulty() {
 /* TODO
  *
  * Pedestrians - Same as cross traffic
- * 
+ *
  */
 
 
@@ -251,7 +251,7 @@ function checkSuccess() {
 /* TODO
  *
  * User car(s)
- * 
+ *
  */
 function drawUserCar() {
 	ctx.drawImage(userCar.img, userCar.x, userCar.y, carWidth, carLength);
@@ -345,19 +345,19 @@ function setup() {
 	userCarFast = {
 		x: canvasW / 2 + laneOffset,
 		y: canvasH - carLength,
-		speed: 12, 
+		speed: 12,
 		img: document.getElementById("car-fast")
 	};
 	userCarMed = {
 		x: canvasW / 2 + laneOffset,
 		y: canvasH - carLength,
-		speed: 8, 
+		speed: 8,
 		img: document.getElementById("car-med")
 	};
 	userCarSlow = {
 		x: canvasW / 2 + laneOffset,
 		y: canvasH - carLength,
-		speed: 5, 
+		speed: 5,
 		img: document.getElementById("car-slow")
 	};
 
@@ -393,7 +393,7 @@ function crossSuccess() {
 function initNextLevel() {
 	levelScore = 1600;
 	increaseDifficulty();
-	drawBackground(); 
+	drawBackground();
 	userCarNum = (userCarNum + 1) % 3;
 	setUserCar(userCarNum);
 	window.addEventListener("keydown", arrowKeys, false);
@@ -413,7 +413,7 @@ function drawGameOverText() {
 	if (canvasW < 250) {
 		ctx.font = "18px Arial";
 	}
-	ctx.fillText("Game Over!", canvasW/4, canvasH/4); 
+	ctx.fillText("Game Over!", canvasW/4, canvasH/4);
 	ctx.fillText("Score: " + totalScore, canvasW/4, canvasH/2);
 	ctx.fillText("Press SPACE to Play Again!", canvasW/4, 3*canvasH/4);
 }
@@ -424,7 +424,7 @@ function drawNextLevelText() {
 	if (canvasW < 250) {
 		ctx.font = "18px Arial";
 	}
-	ctx.fillText("Nice! Level Score: " + levelScore, canvasW/4, canvasH/4); 
+	ctx.fillText("Nice! Level Score: " + levelScore, canvasW/4, canvasH/4);
 	ctx.fillText("Total Score: " + totalScore, canvasW/4, canvasH/2);
 	ctx.fillText("Press SPACE for Next Level!", canvasW/4, 3*canvasH/4);
 }
