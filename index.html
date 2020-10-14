@@ -6,7 +6,9 @@
 		<meta name="description" content="Get through the traffic!">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="nocopnostop.css">
-    <script src="jquery-3.5.1.js"></script>
+    <!-- <script src="jquery-3.5.1.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script src="nocopnostop.js"></script>
 	</head>
 	<body>
@@ -34,11 +36,20 @@
       <div id="candiv">
         <canvas id="myCanvas"></canvas>
       </div>
-			<p>Instructions or scores or something....</p>
+			<p>Hover over here for instructions Get the car across without hitting another car/pedestrian</p>
 		</section>
 
+
 		<footer>
-			<h1>Footer Content</h1>
+			<p>Press Arrows
+			<div class="position">
+			    <ul>
+			        <li title="Move Up" class="arrowUp" id="moveUp"></li>
+			        <li title="Move Down" class="arrowDown" id="moveDown"></li>
+			    </ul>
+			</div>
+			to play
+		</p>
 		</footer>
 
 		<!-- Image loads for use in JS-->

@@ -286,6 +286,15 @@ function setUserCar(spd) {
 	}
 }
 
+$(document).ready(function(event) {
+  $("#moveUp").click(function() {
+
+    event.preventDefault();
+    if (userCar.y >= 0) //Move cars at different speeds
+      userCar.y -= userCar.speed;
+      drawNew();
+  });
+});
 /* Key press handling */
 function arrowKeys(event) {
 	// Do key actions
@@ -372,6 +381,7 @@ function setup() {
 	// Add keys listener
 	window.addEventListener("keydown", arrowKeys, false);
 
+
 	// Get everyone Moving
 	moveInterval = setInterval(moveAndDraw, 35);
 }
@@ -380,6 +390,7 @@ function gameOver() {
 	isGameOver = true;
 	drawInfoBox();
 	drawGameOverText();
+
 	window.addEventListener("keydown", spaceKey, false);
 }
 
