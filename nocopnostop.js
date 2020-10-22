@@ -18,6 +18,7 @@ var lTraffic, rTraffic;
 var finishY;
 var isGameOver;
 var totalScore, levelScore;
+var noButtonClick;
 
 
 /*
@@ -33,11 +34,12 @@ window.onload = function() {
 
 // Function to draw everyone
 function drawNew() {
-	ctx.clearRect(0,0,canvasW, canvasH);
-	drawBackground();
-	drawTraffic();
-	drawUserCar();
-
+  if(!noButtonClick){
+    ctx.clearRect(0,0,canvasW, canvasH);
+    drawBackground();
+    drawTraffic();
+    drawUserCar();
+  }
 	// TODO:
 	// draw pedestrian
 }
@@ -286,15 +288,6 @@ function setUserCar(spd) {
 	}
 }
 
-$(document).ready(function(event) {
-  $("#moveUp").click(function() {
-
-    event.preventDefault();
-    if (userCar.y >= 0) //Move cars at different speeds
-      userCar.y -= userCar.speed;
-      drawNew();
-  });
-});
 /* Key press handling */
 function arrowKeys(event) {
 	// Do key actions
@@ -313,6 +306,35 @@ function arrowKeys(event) {
 			break;
 	}
 }
+
+//buttons click
+var timeout;
+$(document).on("mousedown", "li.arrowUp", function () {
+  timeout = setInterval(function(){
+    if (userCar.y >= 0){ //Move cars at different speeds
+      userCar.y -= userCar.speed;
+      drawNew();
+    }
+  }, 50 );
+  return false;
+// break;
+});
+
+$(document).on("mousedown", "li.arrowDown", function () {
+  timeout = setInterval(function(){
+    if (userCar.y <= (canvasH - carLength)) {
+      userCar.y += userCar.speed;
+      drawNew();
+    }
+  }, 50 );
+// break;
+});
+
+$(document).mouseup(function(){
+  clearInterval(timeout);
+  return false;
+});
+
 
 function spaceKey(event) {
 	if (event.keyCode === 32) {
@@ -345,8 +367,10 @@ function setup() {
 	carLength = canvasH / 6;
 	carWidth = canvasH / 8 - 2*laneOffset;
 	finishY = Math.ceil(canvasH / 20);
-	isGameOver = false;
-	totalScore = 0;
+  isGameOver = false;
+  noButtonClick = false;
+  totalScore = 0;
+  $("#score").html("Score: " + totalScore);
 	levelScore = 1600;
 	userCarNum = 1;
 
@@ -387,7 +411,8 @@ function setup() {
 }
 
 function gameOver() {
-	isGameOver = true;
+  isGameOver = true;
+  noButtonClick = true;
 	drawInfoBox();
 	drawGameOverText();
 
@@ -395,13 +420,16 @@ function gameOver() {
 }
 
 function crossSuccess() {
-	totalScore += levelScore;
+  totalScore += levelScore;
+  $("#score").html("Score: " + totalScore);
+  noButtonClick = true;
 	drawInfoBox();
 	drawNextLevelText();
 	window.addEventListener("keydown", spaceKey, false);
 }
 
 function initNextLevel() {
+  noButtonClick = false;
 	levelScore = 1600;
 	increaseDifficulty();
 	drawBackground();

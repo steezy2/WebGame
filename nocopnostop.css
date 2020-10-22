@@ -1,20 +1,42 @@
 Body {
   font-family:  "Lucida Console", Courier, monospace;
+  background-color: #aaaaaa;
 }
 
 /* Hover for instructions */
-section > p {
+#instr {
+  display: block;
+  float: left;
   width: 300px;
   overflow: hidden;
   height: 15px;
-  background: white;
+  color: rgb(38, 0, 255);
+  background: #aaaaaa;
   font-size: 15px;
   transition: width 2s, height 4s;
 }
 
-section > p:hover {
+#instr:hover {
   height: 50px;
 }
+
+hr {
+  clear: both;
+}
+#score {
+  color: rgb(38, 0, 255);
+  display:block;
+  float:right;
+  width: 25%;
+  margin-left:10px;
+}
+
+CSS for score 
+#score {
+  display: inline;
+  text-align: right;
+  height: 15px;
+} 
 
 /* CSS for arrows */
 .position ul, .position li {
