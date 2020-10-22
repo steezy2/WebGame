@@ -37,10 +37,14 @@ hr {
   position: relative;
   top: 30px;
   left: 50%;
+  width: 316.91px;
+  height: 47px;
   transform: translate(-50%,-50%);
+  background: black;
 }
 
 .btn{
+  top: 15px;
   position: relative;
 
   color: white;
