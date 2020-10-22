@@ -20,7 +20,6 @@ var isGameOver;
 var totalScore, levelScore;
 var noButtonClick;
 
-
 /*
  *
  * Initialization
@@ -28,9 +27,8 @@ var noButtonClick;
  */
 window.onload = function() {
   setup();
+  $("#hiddentext").hide();
 }
-
-
 
 // Function to draw everyone
 function drawNew() {
@@ -57,7 +55,6 @@ function moveAndDraw() {
 	checkCollisions();
 	checkSuccess();
 }
-
 
 /*
  *
@@ -317,7 +314,7 @@ $(document).on("mousedown", "li.arrowUp", function () {
     }
   }, 50 );
   return false;
-// break;
+
 });
 
 $(document).on("mousedown", "li.arrowDown", function () {
@@ -327,7 +324,7 @@ $(document).on("mousedown", "li.arrowDown", function () {
       drawNew();
     }
   }, 50 );
-// break;
+
 });
 
 $(document).mouseup(function(){
@@ -335,6 +332,12 @@ $(document).mouseup(function(){
   return false;
 });
 
+//more info button
+$(document).on("click", "a.btn", function(){
+  //alert("click");
+  $("#hiddentext").slideDown(2000).delay(10000).slideUp(2000);
+  return false;
+});
 
 function spaceKey(event) {
 	if (event.keyCode === 32) {
