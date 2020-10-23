@@ -32,6 +32,39 @@ hr {
   font-size: 15px;
 }
 
+/*CSS for restart button for mobile */
+#restart {
+  position: relative;
+  overflow: hidden;
+  left: 300px;
+  font-size: 18px;
+  padding:20px;
+  display: none;
+  border-radius: 10px;
+}
+
+@media (max-width: 1100px) {
+  #restart {
+    left: 200px;
+  }
+  /* CSS that should be displayed if width is equal to or less than 800px goes here */
+}
+@media (max-width: 900px) {
+  #restart {
+    left: 100px;
+  }
+  /* CSS that should be displayed if width is equal to or less than 800px goes here */
+}
+
+@media (max-width: 700px) {
+  #restart {
+    left: 0px;
+  }
+  /* CSS that should be displayed if width is equal to or less than 800px goes here */
+}
+
+
+
 /*CSS for more info button */
 .left{
   position: relative;
@@ -236,7 +269,7 @@ animation-direction: alternate;
   align-items: center;
   justify-content: center;
 }
-header, footer{
+footer{
   background-color: black;
   color: white;
   display: flex;
@@ -244,6 +277,13 @@ header, footer{
   justify-content: center;
 }
 
+header {
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* TODO
  *

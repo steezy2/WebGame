@@ -339,6 +339,17 @@ $(document).on("click", "a.btn", function(){
   return false;
 });
 
+//restart button
+$(document).on("click", "#restart", function(){
+  if (isGameOver) {
+    setup();
+  }
+  else {
+    initNextLevel();
+  }
+  $("#restart").hide();
+});
+
 function spaceKey(event) {
 	if (event.keyCode === 32) {
 		event.preventDefault();
@@ -348,7 +359,8 @@ function spaceKey(event) {
 		}
 		else {
 			initNextLevel();
-		}
+    }
+    $("#restart").hide();
 	}
 }
 
@@ -359,7 +371,7 @@ $(window).resize(function() {
 
 
 function setup() {
-	// ***Get Elements***
+  // ***Get Elements***
   canvas = document.getElementById("myCanvas");
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.width*0.5;
@@ -416,9 +428,9 @@ function setup() {
 function gameOver() {
   isGameOver = true;
   noButtonClick = true;
+  $("#restart").show();
 	drawInfoBox();
 	drawGameOverText();
-
 	window.addEventListener("keydown", spaceKey, false);
 }
 
@@ -426,6 +438,7 @@ function crossSuccess() {
   totalScore += levelScore;
   $("#score").html("Score: " + totalScore);
   noButtonClick = true;
+  $("#restart").show();
 	drawInfoBox();
 	drawNextLevelText();
 	window.addEventListener("keydown", spaceKey, false);
