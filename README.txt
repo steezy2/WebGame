@@ -7,3 +7,12 @@ One of the toughest things to deal with was using the same car images while faci
 We added custom animation for the more info button as well as chaining for hiding/showing the info. Additonally there is screen resizing functionality and a restart button that hide/show on win/lose. Additonally the restart button has some css that moves it depending on screen size. This is to enable mobile support (no space bar on mobile).
 
 Up arrow and Down arrow buttons work on click for mobile.
+
+There was a strange bug trying to do on click events with jquery
+instead of using the normal code such as:
+$("#restart").click(function(){
+
+we had to use
+$(document).on("click", "#restart", function(){
+
+not sure why exactly but it works.
