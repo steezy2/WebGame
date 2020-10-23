@@ -446,27 +446,27 @@ function initNextLevel() {
 function drawInfoBox() {
 	// Draw Rect
 	ctx.fillStyle = "#FFFFFF";
-	ctx.fillRect(canvasW/6, canvasH/6, 2*canvasW/3, 2*canvasH/3);
+	ctx.fillRect(canvasW/7, canvasH/7, 3*canvasW/4, 2*canvasH/3);
 }
 
 function drawGameOverText() {
 	ctx.fillStyle = "#000000";
 	ctx.font = "30px Arial";
 	if (canvasW < 250) {
-		ctx.font = "18px Arial";
+		ctx.font = "17px Arial";
 	}
-	ctx.fillText("Game Over!", canvasW/4, canvasH/4);
-	ctx.fillText("Score: " + totalScore, canvasW/4, canvasH/2);
-	ctx.fillText("Press SPACE to Play Again!", canvasW/4, 3*canvasH/4);
+	ctx.fillText("Game Over!", canvasW/5, canvasH/4);
+	ctx.fillText("Score: " + totalScore, canvasW/5, canvasH/2);
+	ctx.fillText("Press SPACE to Play Again!", canvasW/5, 3*canvasH/4);
 }
 
 function drawNextLevelText() {
 	ctx.fillStyle = "#000000";
 	ctx.font = "30px Arial";
 	if (canvasW < 250) {
-		ctx.font = "18px Arial";
+		ctx.font = "17px Arial";
 	}
-	ctx.fillText("Nice! Level Score: " + levelScore, canvasW/4, canvasH/4);
-	ctx.fillText("Total Score: " + totalScore, canvasW/4, canvasH/2);
-	ctx.fillText("Press SPACE for Next Level!", canvasW/4, 3*canvasH/4);
+	ctx.fillText("Nice! Level Score: " + levelScore, canvasW/5, canvasH/4);
+	ctx.fillText("Total Score: " + totalScore, canvasW/5, canvasH/2);
+	ctx.fillText("Press SPACE for Next Level!", canvasW/5, 3*canvasH/4);
 }
